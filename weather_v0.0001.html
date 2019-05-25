@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Vancouver Weather Predictor</title>
+</head>
+<body>
+
+<center>
+
+<h1> Choose a date </h1>
+
+<table>
+
+  <tr>
+
+<td>
+
+<select name="month">
+  <option value="jan">jan</option>
+  <option value="feb">feb</option>
+  <option value="mar">mar</option>
+  <option value="apr">apr</option>
+  <option value="may">may</option>
+  <option value="jun">jun</option>
+  <option value="jul">jul</option>
+  <option value="aug">aug</option>
+  <option value="sep">sep</option>
+  <option value="oct">oct</option>
+  <option value="nov">nov</option>
+  <option value="dec">dec</option>
+</select>
+
+</td>
+
+<td>
+
+<select name="day">
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+  <option value="6">6</option>
+  <option value="7">7</option>
+  <option value="8">8</option>
+  <option value="9">9</option>
+  <option value="10">10</option>
+  <option value="11">11</option>
+  <option value="12">12</option>
+  <option value="13">13</option>
+  <option value="14">14</option>
+  <option value="15">15</option>
+  <option value="16">16</option>
+  <option value="17">17</option>
+  <option value="18">18</option>
+  <option value="19">19</option>
+  <option value="20">20</option>
+  <option value="21">21</option>
+  <option value="22">22</option>
+  <option value="23">23</option>
+  <option value="24">24</option>
+  <option value="25">25</option>
+  <option value="26">26</option>
+  <option value="27">27</option>
+  <option value="28">28</option>
+  <option value="29">29</option>
+  <option value="30">30</option>
+  <option value="31">31</option>
+</select>
+
+</td>
+
+<td>
+
+<select name="year">
+  <option value="2019">2019</option>
+  <option value="2020">2020</option>
+  <option value="2021">2021</option>
+  <option value="2022">2022</option>
+  <option value="2023">2023</option>
+  <option value="2024">2024</option>
+  <option value="2025">2025</option>
+  <option value="2026">2026</option>
+  <option value="2027">2027</option>
+  <option value="2028">2028</option>
+  <option value="2029">2029</option>
+  <option value="2030">2030</option>
+  <option value="2031">2031</option>
+  <option value="2032">2032</option>
+  <option value="2033">2033</option>
+  <option value="2034">2034</option>
+  <option value="2035">2035</option>
+  <option value="2036">2036</option>
+  <option value="2037">2037</option>
+  <option value="2038">2038</option>
+  <option value="2039">2039</option>
+  <option value="2040">2040</option>
+  <option value="2041">2041</option>
+  <option value="2042">2042</option>
+  <option value="2043">2043</option>
+  <option value="2044">2044</option>
+  <option value="2045">2045</option>
+  <option value="2046">2046</option>
+  <option value="2047">2047</option>
+  <option value="2048">2048</option>
+  <option value="2049">2049</option>
+</select>
+
+</td>
+
+<td>
+
+<button value="Submit" onclick="weather()">Submit</button>
+
+</td>
+
+  </tr>
+
+</table>
+
+<p id="forecast"></p>
+
+</center>
+
+<script>
+
+function weather() {
+
+var x = document.getElementsByName("month")[0].value;
+
+var high = -100;
+var low = -1000;
+var rain = -1;
+
+switch(x) {
+  case "jan":
+    high = 11.3; low = -3.0; rain = 15;
+    break;
+  case "feb":
+    high = 8.5; low = -8.8; rain = 13;
+    break;
+  case "mar":
+    high = 17.3; low = -4.7; rain = 14;
+    break;
+  case "apr":
+    high = 15.9; low = 1.1; rain = 12;
+    break;
+  case "may":
+    high = 22.9; low = 5.3; rain = 9;
+    break;
+  case "jun":
+    high = 26.8; low = 8.3; rain = 7;
+    break;
+  case "jul":
+    high = 28.6; low = 8.8; rain = 4;
+    break;
+  case "aug":
+    high = 29.0; low = 10.8; rain = 4;
+    break;
+  case "sep":
+    high = 27.1; low = 6.1; rain = 6;
+    break;
+  case "oct":
+    high = 17.6; low = 1.6; rain = 12;
+    break;
+  case "nov":
+    high = 15.0; low = -2.2; rain = 16;
+    break;
+  case "dec":
+    high = 12.9; low = -5.7; rain = 15;
+    break;
+  default:
+    break;
+}
+
+// Generate a random, uniformly distributed // temperature based on past weather data
+var gap = high - low;
+var tempSim = low + (Math.random() * gap);
+var tempRound = Math.round(tempSim);
+
+// Generate a random scenario of rain or sun based 
+// on past weather data
+var probRain = rain/30;
+
+var rand = Math.random();
+var rainStr = "sun";
+
+if (probRain > rand) {
+	rainStr = "rain";
+} else {}
+
+// The generated weather prediction should approach
+// the true current weather after an infinite 
+// number of predictions, assuming weather is 
+// yearly cyclical and past weather data reliably
+// predicts future weather events
+//
+// Sources: 
+//
+// https://www.google.com/search?q=vancouver
+// +climate+data
+// 
+// https://vancouver.weatherstats.ca/charts/
+// temperature-monthly.html
+
+document.getElementById("forecast").innerHTML = "temp: " + tempRound + " &degC, " + rainStr;
+
+}
+
+</script>
+
+</body>
+</html>
